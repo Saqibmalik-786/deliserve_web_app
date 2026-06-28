@@ -1,0 +1,38 @@
+.container{
+    width:min(var(--container-width),90%);
+    margin:auto;
+}
+
+.section{
+    padding-block:var(--section-spacing);
+}
+
+.section-title{
+    font-size:2rem;
+    font-weight:700;
+    margin-bottom:2rem;
+}
+
+.primary-btn{
+    background:var(--color-primary);
+    color:white;
+    padding:.9rem 1.5rem;
+    border-radius:12px;
+    transition:var(--transition);
+}
+
+.primary-btn:hover{
+    background:var(--color-primary-hover);
+}
+
+@media(max-width:768px){
+
+    .section{
+        padding-block:3.5rem;
+    }
+
+    .section-title{
+        font-size:1.6rem;
+    }
+
+}

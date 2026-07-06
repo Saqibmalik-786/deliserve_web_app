@@ -1,10 +1,14 @@
 import "./Navbar.css";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import { Link } from "react-router-dom";
+import {useAuth} from '@/context/AuthContext'
 function Navbar(){
-
+    const { user, signOutUser } = useAuth();
     const [menuOpen,setMenuOpen]=useState(false);
-
+    useEffect(() => {
+        user && console.log("User is logged in:", user);
+        !user && console.log("User is not logged in.");
+    }, [user]);
     return(
 
        <header className="navbar">
@@ -28,8 +32,14 @@ function Navbar(){
 
             <Link to="/">Home</Link>
             <Link to="/">Become Partner</Link>
-            <Link to="/login">Login</Link>
-
+            {user ? (
+                <>
+                    <span style={{fontSize:"10px", color:"var(--color-primary)"}}> Welcome <br></br>{user.user_metadata.full_name}</span>
+                    <button onClick={signOutUser}>Logout</button>
+                </>
+            ) : (
+                <Link to="/login">Login</Link>
+            )}
         </nav>
 
         <button

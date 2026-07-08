@@ -6,6 +6,7 @@ import Main from './pages/Main'
 import Footer from './components/ui/Footer'
 import Login from './pages/Login'
 import Signup from './pages/Signup'
+import BecomePartner from './pages/BecomePartner'
 function App() {
   
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path="/" element={<Main />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
+          <Route path="/become-partner" element={<BecomePartner />} />
         </Routes>
       </main>
       <Footer/>

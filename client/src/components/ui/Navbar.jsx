@@ -27,14 +27,18 @@ function Navbar(){
             />
 
         </div>
-
         <nav className={menuOpen ? "nav-links active" : "nav-links"}>
-
+            {user && (
+                <span style={{fontSize:"12px", color:"var(--color-primary)"}}> Welcome <br></br>
+                <strong style={{fontSize:"14px", color:"var(--color-primary)"}}>
+                {user.user_metadata.full_name}
+                </strong>
+                </span>
+            )}
             <Link to="/">Home</Link>
-            <Link to="/">Become Partner</Link>
+            <Link to="/become-partner">Become Partner</Link>
             {user ? (
                 <>
-                    <span style={{fontSize:"10px", color:"var(--color-primary)"}}> Welcome <br></br>{user.user_metadata.full_name}</span>
                     <button onClick={signOutUser}>Logout</button>
                 </>
             ) : (

@@ -1,0 +1,53 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id              Int      @id @default(autoincrement())
+  supabaseUserId  String   @unique
+  fullName        String
+  email           String   @unique
+
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  restaurant Restaurant?
+
+  @@map("users")
+}
+
+model Restaurant {
+  id               Int      @id @default(autoincrement())
+
+  ownerId          Int      @unique
+
+  name             String
+  description      String?  @db.Text
+
+  whatsappNumber   String
+  phoneNumber      String?
+
+  address          String   @db.Text
+  city             String
+  area             String?
+
+  latitude         Decimal? @db.Decimal(10,8)
+  longitude        Decimal? @db.Decimal(11,8)
+
+  logo             String?
+  banner           String?
+
+  isVerified       Boolean  @default(false)
+
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  owner User @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+
+  @@map("restaurants")
+}

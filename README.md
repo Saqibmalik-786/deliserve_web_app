@@ -1,22 +1,27 @@
-# Deliserve Backend
+# Deliserve
 
 ## Overview
 
-Deliserve is a food ordering platform designed to help local restaurants establish an online presence without building their own website or mobile application. Restaurant owners can register their business, manage menus, and receive customer orders directly through WhatsApp.
+Deliserve is a platform that helps local restaurants establish an online presence without the need to build their own website or mobile application. It enables customers to discover nearby restaurants, browse menus, and place orders directly through WhatsApp, making the ordering process simple for both customers and restaurant owners.
 
-This repository contains the backend API for Deliserve, built with **Node.js**, **Express.js**, **Prisma ORM**, and **MySQL**. Authentication is handled by **Supabase**, while the backend manages application data such as users, restaurants, menus, orders, and other business-related operations.
+The platform is designed to support small and medium-sized food businesses by providing an affordable digital solution to reach more customers. Restaurant owners can create and manage their own restaurant profile, upload menus, update food items, and receive orders through their registered WhatsApp number.
 
-The backend follows a layered architecture (**Controller → Service → Repository**) to keep the code modular, maintainable, and scalable as the project grows.
+For customers, Deliserve offers a convenient way to explore nearby restaurants, search for food, compare menus, and order from local businesses in one place. By using location-based services, the platform helps users discover restaurants around them without needing separate apps or websites for each business.
 
-### Core Features
+Deliserve is built with scalability in mind, allowing future expansion into features such as online payments, real-time order tracking, customer reviews, promotional offers, analytics dashboards, and delivery partner integration.
 
-- User synchronization with Supabase Authentication
+## Vision
+
+To empower local restaurants with accessible digital tools while providing customers with a simple, fast, and centralized food discovery and ordering experience.
+
+## Key Features
+
 - Restaurant registration and management
-- Menu and food item management
-- Nearby restaurant discovery using location data
-- WhatsApp-based order system
-- Secure RESTful APIs
-- Prisma ORM with MySQL database
-- Scalable backend architecture for future expansion
-
-Deliserve aims to provide an affordable and simple digital solution for local restaurants while making food discovery and ordering more convenient for customers.
+- Restaurant profiles with menus and food categories
+- Nearby restaurant discovery using location services
+- Powerful restaurant and food search
+- WhatsApp-based ordering system
+- Secure user authentication
+- Customer and restaurant dashboards
+- Favorites and reviews
+- Scalable architecture for future growth

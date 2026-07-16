@@ -1,5 +1,6 @@
 import { signInWithGoogle, logout, Signup, Signin } from '@/lib/supabaseAuth/AuthService';
 import { supabase } from '@/lib/supabaseAuth/supabaseClient';
+import usersApi from '@/api/usersApi';
 import React, { createContext, useState, useContext, useEffect } from 'react';
 
 const AuthContext = createContext();
@@ -7,6 +8,16 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+
+  const syncUserWithBackend = async (authUser) => {
+    if (!authUser?.email) return;
+
+    try {
+      await usersApi.register(authUser);
+    } catch (error) {
+      console.error('Error syncing user with backend:', error);
+    }
+  };
 
   useEffect(() => {
     let isMounted = true;
@@ -17,8 +28,13 @@ export const AuthProvider = ({ children }) => {
       } = await supabase.auth.getSession();
 
       if (isMounted) {
-        setUser(session?.user ?? null);
+        const nextUser = session?.user ?? null;
+        setUser(nextUser);
         setLoading(false);
+      }
+
+      if (session?.user) {
+        await syncUserWithBackend(session.user);
       }
     };
 
@@ -26,10 +42,15 @@ export const AuthProvider = ({ children }) => {
 
     const {
       data: { subscription },
-    } = supabase.auth.onAuthStateChange((_event, session) => {
+    } = supabase.auth.onAuthStateChange(async (_event, session) => {
       if (isMounted) {
-        setUser(session?.user ?? null);
+        const nextUser = session?.user ?? null;
+        setUser(nextUser);
         setLoading(false);
+      }
+
+      if (session?.user) {
+        await syncUserWithBackend(session.user);
       }
     });
 
